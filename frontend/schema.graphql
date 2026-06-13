@@ -1,0 +1,352 @@
+"""The root query type which gives access points into the data universe."""
+type Query implements Node {
+  """
+  Exposes the root query type nested one level down. This is helpful for Relay 1
+  which can only query top level fields if they are in a particular form.
+  """
+  query: Query!
+
+  """
+  The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`.
+  """
+  id: ID!
+
+  """Fetches an object given its globally unique `ID`."""
+  node(
+    """The globally unique `ID`."""
+    id: ID!
+  ): Node
+
+  """Get a single `Item`."""
+  itemByRowId(rowId: Int!): Item
+
+  """Returns items containing a given search term."""
+  searchItems(
+    search: String
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+  ): ItemConnection
+
+  """Reads a single `Item` using its globally unique `ID`."""
+  item(
+    """The globally unique `ID` to be used in selecting a single `Item`."""
+    id: ID!
+  ): Item
+
+  """Reads and enables pagination through a set of `Item`."""
+  allItems(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ItemCondition
+
+    """The method to use when ordering `Item`."""
+    orderBy: [ItemOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ItemConnection
+}
+
+"""An object with a globally unique `ID`."""
+interface Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  id: ID!
+}
+
+type Item implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  id: ID!
+  rowId: Int!
+  name: String!
+  description: String
+}
+
+"""A connection to a list of `Item` values."""
+type ItemConnection {
+  """A list of `Item` objects."""
+  nodes: [Item]!
+
+  """
+  A list of edges which contains the `Item` and cursor to aid in pagination.
+  """
+  edges: [ItemEdge]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Item` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Item` edge in the connection."""
+type ItemEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Item` at the end of the edge."""
+  node: Item
+}
+
+"""A location in a connection that can be used for resuming pagination."""
+scalar Cursor
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: Cursor
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: Cursor
+}
+
+"""
+A condition to be used against `Item` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input ItemCondition {
+  """Checks for equality with the object’s `rowId` field."""
+  rowId: Int
+}
+
+"""Methods to use when ordering `Item`."""
+enum ItemOrderBy {
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  ROW_ID_ASC
+  ROW_ID_DESC
+}
+
+"""
+The root mutation type which contains root level fields which mutate data.
+"""
+type Mutation {
+  """Creates a single `Item`."""
+  createItem(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateItemInput!
+  ): CreateItemPayload
+
+  """Updates a single `Item` using its globally unique id and a patch."""
+  updateItem(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateItemInput!
+  ): UpdateItemPayload
+
+  """Updates a single `Item` using a unique key and a patch."""
+  updateItemByRowId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateItemByRowIdInput!
+  ): UpdateItemPayload
+
+  """Deletes a single `Item` using its globally unique id."""
+  deleteItem(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteItemInput!
+  ): DeleteItemPayload
+
+  """Deletes a single `Item` using a unique key."""
+  deleteItemByRowId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteItemByRowIdInput!
+  ): DeleteItemPayload
+}
+
+"""The output of our create `Item` mutation."""
+type CreateItemPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Item` that was created by this mutation."""
+  item: Item
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Item`. May be used by Relay 1."""
+  itemEdge(
+    """The method to use when ordering `Item`."""
+    orderBy: [ItemOrderBy!]! = [PRIMARY_KEY_ASC]
+  ): ItemEdge
+}
+
+"""All input for the create `Item` mutation."""
+input CreateItemInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Item` to be created by this mutation."""
+  item: ItemInput!
+}
+
+"""An input for mutations affecting `Item`"""
+input ItemInput {
+  rowId: Int
+  name: String!
+  description: String
+}
+
+"""The output of our update `Item` mutation."""
+type UpdateItemPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Item` that was updated by this mutation."""
+  item: Item
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Item`. May be used by Relay 1."""
+  itemEdge(
+    """The method to use when ordering `Item`."""
+    orderBy: [ItemOrderBy!]! = [PRIMARY_KEY_ASC]
+  ): ItemEdge
+}
+
+"""All input for the `updateItem` mutation."""
+input UpdateItemInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Item` to be updated.
+  """
+  id: ID!
+
+  """
+  An object where the defined keys will be set on the `Item` being updated.
+  """
+  itemPatch: ItemPatch!
+}
+
+"""Represents an update to a `Item`. Fields that are set will be updated."""
+input ItemPatch {
+  rowId: Int
+  name: String
+  description: String
+}
+
+"""All input for the `updateItemByRowId` mutation."""
+input UpdateItemByRowIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  rowId: Int!
+
+  """
+  An object where the defined keys will be set on the `Item` being updated.
+  """
+  itemPatch: ItemPatch!
+}
+
+"""The output of our delete `Item` mutation."""
+type DeleteItemPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Item` that was deleted by this mutation."""
+  item: Item
+  deletedItemId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Item`. May be used by Relay 1."""
+  itemEdge(
+    """The method to use when ordering `Item`."""
+    orderBy: [ItemOrderBy!]! = [PRIMARY_KEY_ASC]
+  ): ItemEdge
+}
+
+"""All input for the `deleteItem` mutation."""
+input DeleteItemInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Item` to be deleted.
+  """
+  id: ID!
+}
+
+"""All input for the `deleteItemByRowId` mutation."""
+input DeleteItemByRowIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  rowId: Int!
+}

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+CURRENT_DIR="${PWD##*/}"
+if [ "$CURRENT_DIR" = "scripts" ]
+then
+	echo "This script should be run from project root, not from scripts subdirectory"
+	exit 1;
+fi
+
+COMPOSE_CMD="./scripts/container compose";
+
+${COMPOSE_CMD} cp backend:/home/node/app/schema.graphql ./frontend/schema.graphql

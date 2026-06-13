@@ -1,0 +1,62 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      target: development
+    init: true
+    # userns_mode: "keep-id"
+    volumes:
+      - ./backend/src:/home/node/app/src:z
+    depends_on:
+      db:
+        condition: service_healthy
+
+    healthcheck:
+      test: "curl -f http://localhost:3002/api/health || exit 1"
+    ports:
+      - "3002:3002"
+    networks:
+      - db-net
+
+  db:
+    build:
+      context: ./db
+    env_file: ./db/static.env
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+    volumes:
+      - pg_data:/var/lib/postgresql # v18+
+      - ./db/init:/docker-entrypoint-initdb.d:ro,z
+    networks:
+      - db-net
+
+  frontend:
+    build:
+      context: ./frontend
+      target: development
+    init: true
+    volumes:
+      - ./frontend/src:/home/node/app/src:z
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+    healthcheck:
+      test: "curl -f http://localhost:3001/ || exit 1"
+
+  db-adm:
+    image: adminer
+    depends_on:
+      - db
+    networks:
+      - db-net
+
+volumes:
+  pg_data:
+
+networks:
+  db-net:
+
+x-podman:
+  in_pod: false

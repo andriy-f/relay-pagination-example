@@ -1,0 +1,9 @@
+{
+  "watch": [
+    "src/**/*.*"
+  ],
+  "ignore": [
+    "src/**/*.spec.ts"
+  ],
+  "exec": "pnpm run build && pnpm run start"
+}

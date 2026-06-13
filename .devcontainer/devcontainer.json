@@ -1,0 +1,39 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node
+{
+	"name": "relay-pagination-example",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"dockerFile": "./Dockerfile",
+	"runArgs": [
+		"--userns=keep-id:uid=1000,gid=1000", // for rootless Podman only
+		// "--security-opt=label=disable",
+		"--network=protected-media-platform_db-net"
+	],
+	// Create folder on your local system for pnpm store and set env var $MY_PNPM_STORE_PATH to that folder's path
+	"mounts": [
+		//		"source=${localEnv:MY_PNPM_STORE_PATH},target=${containerWorkspaceFolder}/.pnpm-store,type=bind,consistency=cached,relabel=shared"
+	],
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached,relabel=shared",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "corepack install && pnpm install"
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"streetsidesoftware.code-spell-checker",
+				"matthewpi.caddyfile-support",
+				"bradlc.vscode-tailwindcss",
+				"EditorConfig.EditorConfig"
+			]
+		}
+	}
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}

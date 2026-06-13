@@ -6,7 +6,8 @@
     "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "lint": "eslint"
   },
   "dependencies": {
     "@react-router/node": "7.16.0",
@@ -22,6 +23,7 @@
     "@eslint/js": "^10.0.1",
     "@react-router/dev": "7.16.0",
     "@rolldown/plugin-babel": "^0.2.3",
+    "@stylistic/eslint-plugin": "^5.10.0",
     "@tailwindcss/vite": "^4.2.2",
     "@types/node": "^22",
     "@types/react": "^19.2.14",

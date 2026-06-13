@@ -1,9 +1,11 @@
-const Items = () => {
-    return (
-        <div>
-            <h1>Items</h1>
-        </div>
-    );
-};
+import React from "react"
 
-export default Items;
+const Items = (): React.ReactNode => {
+  return (
+    <div>
+      <h1>Items</h1>
+    </div>
+  )
+}
+
+export default Items

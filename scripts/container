@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# This script is used to run docker or podman with the correct container engine.
+#
+# Supported environment variables:
+# - CONTAINER_ENGINE: specify custom container engine to use (podman or docker)
+
+if [ "$IS_DEV_CONTAINER" = "true" ]
+then
+	echo "This script should not be run inside devcontainer, but rather from host";
+	exit 1;
+fi
+
+CURRENT_DIR="${PWD##*/}";
+if [ "$CURRENT_DIR" = "scripts" ]
+then
+	echo "This script should be run from project root, not scripts subdirectory"
+	exit 1;
+fi
+
+# Use container engine specified in CONTAINER_ENGINE environment variable or one available in the system
+# (trying first podman, then Docker)
+if [ -n "${CONTAINER_ENGINE}" ]; then
+  if command -v ${CONTAINER_ENGINE} >/dev/null 2>&1; then
+    MY_CONTAINER_ENGINE=${CONTAINER_ENGINE}
+  else
+    echo "Wrong container engine specified in CONTAINER_ENGINE: ${CONTAINER_ENGINE}";
+    exit 1;
+  fi
+elif command -v podman >/dev/null 2>&1; then
+  MY_CONTAINER_ENGINE=podman;
+elif command -v docker >/dev/null 2>&1; then
+  MY_CONTAINER_ENGINE=docker;
+else
+  echo "No container engine found. Please install Podman or Docker.";
+  exit 1;
+fi
+
+# Use absolute path to container engine binary
+MY_CONTAINER_ENGINE="$(command -v ${MY_CONTAINER_ENGINE})"
+echo "Using container engine: ${MY_CONTAINER_ENGINE}"
+
+${MY_CONTAINER_ENGINE} "$@"

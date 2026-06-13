@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ "$IS_DEV_CONTAINER" = "true" ]
+then
+	echo "This script should not be run inside devcontainer, but rather from host";
+	exit 1;
+fi
+
+if [ "${PWD##*/}" = "scripts" ]
+then
+	echo "This script should be run from project root, not scripts subdirectory"
+	exit 1;
+fi
+
+COMPOSE_CMD="./scripts/container compose";
+${COMPOSE_CMD} pull \
+  && ${COMPOSE_CMD} build \
+  && ${COMPOSE_CMD} up --remove-orphans;
+${COMPOSE_CMD} down; # Automatically cleanup after 'up'

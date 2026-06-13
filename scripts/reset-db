@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# Guards (pre-cheks)
+CURRENT_DIR="${PWD##*/}"
+if [ "$CURRENT_DIR" = "scripts" ]
+then
+	echo "This script should be run from project root, not from scripts subdirectory"
+	exit 1;
+fi
+
+read -p "This will drop and re-create existing database. Are you sure you want to proceed? (y/n): " response
+
+case "$response" in
+    [yY][eE][sS]|[yY])
+        echo "Proceeding..."
+        # Add your command here
+        ;;
+    [nN][oO]|[nN])
+        echo "Aborted."
+        exit 1
+        ;;
+    *)
+        echo "Invalid input. Please answer y or n."
+        exit 1
+        ;;
+esac
+
+./scripts/build-base-image;
+
+COMPOSE_CMD="./scripts/container compose";
+
+${COMPOSE_CMD} compose volume rm "${CURRENT_DIR}_pg_data";
+
+${COMPOSE_CMD} up db -d \
+  && ${COMPOSE_CMD} exec db ./wait-till-ready
+
+${COMPOSE_CMD} down;

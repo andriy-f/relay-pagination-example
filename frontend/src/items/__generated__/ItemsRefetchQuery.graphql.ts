@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<4082aa59c441dfe4031f0e3795b086f2>>
+ * @generated SignedSource<<57c5935ff83fc80804463af35c509588>>
  * @lightSyntaxTransform
  */
 
@@ -30,7 +30,7 @@ var v0 = [
     "name": "after"
   },
   {
-    "defaultValue": 10,
+    "defaultValue": 5,
     "kind": "LocalArgument",
     "name": "first"
   },
@@ -175,16 +175,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "fde6f3ed9319f3d85775c5922b7d7435",
+    "cacheID": "59b98ef7022111fae5686e43cd688ff8",
     "id": null,
     "metadata": {},
     "name": "ItemsRefetchQuery",
     "operationKind": "query",
-    "text": "query ItemsRefetchQuery(\n  $after: Cursor\n  $first: Int = 10\n  $search: String\n) {\n  ...ItemsFragment_1Ozsmw\n}\n\nfragment ItemFragment on Item {\n  name\n  description\n}\n\nfragment ItemsFragment_1Ozsmw on Query {\n  searchItems(search: $search, first: $first, after: $after) {\n    edges {\n      node {\n        id\n        ...ItemFragment\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
+    "text": "query ItemsRefetchQuery(\n  $after: Cursor\n  $first: Int = 5\n  $search: String\n) {\n  ...ItemsFragment_1Ozsmw\n}\n\nfragment ItemFragment on Item {\n  name\n  description\n}\n\nfragment ItemsFragment_1Ozsmw on Query {\n  searchItems(search: $search, first: $first, after: $after) {\n    edges {\n      node {\n        id\n        ...ItemFragment\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "c29ef1f572dd24ea91f36f1bb1c5a7c8";
+(node as any).hash = "308488ff44a3c2ae3cf598a849f18bf0";
 
 export default node;

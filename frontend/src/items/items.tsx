@@ -9,7 +9,7 @@ const itemsFragment = graphql`
   @refetchable(queryName: "ItemsRefetchQuery")
   @argumentDefinitions(
     search: { type: String },
-    first: { type: Int, defaultValue: 10 },
+    first: { type: Int, defaultValue: 5 },
     after: { type: Cursor }
   )
   {

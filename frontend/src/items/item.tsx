@@ -13,7 +13,7 @@ const itemFragment = graphql`
 const Items = ({ item }: { item: ItemFragment$key }): React.ReactNode => {
   const res = useFragment(itemFragment, item)
   return (
-    <div>
+    <div className="border-2 border-gray-300 rounded-md p-4 mb-4">
       <h1>{res.name}</h1>
       <p>{res.description}</p>
     </div>

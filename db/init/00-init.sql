@@ -7,7 +7,7 @@ create table item (
 create function search_items(search text) returns setof item as $$
   select i.*
   from item as i 
-  where position(search in i.name) > 0 or position(search in i.description) > 0
+  where search is null or position(search in i.name) > 0 or position(search in i.description) > 0
 $$ language sql stable;
 
 comment on function search_items(text) is 'Returns items containing a given search term.';
@@ -42,4 +42,44 @@ insert into item (name, description) values
 ('Item 27', 'Description 27'),
 ('Item 28', 'Description 28'),
 ('Item 29', 'Description 29'),
-('Item 30', 'Description 30');
+('Item 30', 'Description 30'),
+('Item 31', 'Description 31'),
+('Item 32', 'Description 32'),
+('Item 33', 'Description 33'),
+('Item 34', 'Description 34'),
+('Item 35', 'Description 35'),
+('Item 36', 'Description 36'),
+('Item 37', 'Description 37'),
+('Item 38', 'Description 38'),
+('Item 39', 'Description 39'),
+('Item 40', 'Description 40'),
+('Item 41', 'Description 41'),
+('Item 42', 'Description 42'),
+('Item 43', 'Description 43'),
+('Item 44', 'Description 44'),
+('Item 45', 'Description 45'),
+('Item 46', 'Description 46'),
+('Item 47', 'Description 47'),
+('Item 48', 'Description 48'),
+('Item 49', 'Description 49'),
+('Item 50', 'Description 50'),
+('Item 51', 'Description 51'),
+('Item 52', 'Description 52'),
+('Item 53', 'Description 53'),
+('Item 54', 'Description 54'),
+('Item 55', 'Description 55'),
+('Item 56', 'Description 56'),
+('Item 57', 'Description 57'),
+('Item 58', 'Description 58'),
+('Item 59', 'Description 59'),
+('Item 60', 'Description 60'),
+('Item 61', 'Description 61'),
+('Item 62', 'Description 62'),
+('Item 63', 'Description 63'),
+('Item 64', 'Description 64'),
+('Item 65', 'Description 65'),
+('Item 66', 'Description 66'),
+('Item 67', 'Description 67'),
+('Item 68', 'Description 68'),
+('Item 69', 'Description 69'),
+('Item 70', 'Description 70');

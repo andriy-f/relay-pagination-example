@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<693cf881ebf9e5383ba2545cfd05c4a1>>
+ * @generated SignedSource<<4082aa59c441dfe4031f0e3795b086f2>>
  * @lightSyntaxTransform
  */
 
@@ -10,8 +10,8 @@
 import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type ItemsRefetchQuery$variables = {
+  after?: any | null | undefined;
   first?: number | null | undefined;
-  offset?: number | null | undefined;
   search?: string | null | undefined;
 };
 export type ItemsRefetchQuery$data = {
@@ -25,14 +25,14 @@ export type ItemsRefetchQuery = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "after"
+  },
+  {
     "defaultValue": 10,
     "kind": "LocalArgument",
     "name": "first"
-  },
-  {
-    "defaultValue": 0,
-    "kind": "LocalArgument",
-    "name": "offset"
   },
   {
     "defaultValue": null,
@@ -43,13 +43,13 @@ var v0 = [
 v1 = [
   {
     "kind": "Variable",
-    "name": "first",
-    "variableName": "first"
+    "name": "after",
+    "variableName": "after"
   },
   {
     "kind": "Variable",
-    "name": "offset",
-    "variableName": "offset"
+    "name": "first",
+    "variableName": "first"
   },
   {
     "kind": "Variable",
@@ -144,6 +144,27 @@ return {
                 "kind": "ScalarField",
                 "name": "hasNextPage",
                 "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "hasPreviousPage",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "startCursor",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "endCursor",
+                "storageKey": null
               }
             ],
             "storageKey": null
@@ -154,16 +175,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "0ec46bdbc7dcc8ce6ae66a253b0f6f94",
+    "cacheID": "fde6f3ed9319f3d85775c5922b7d7435",
     "id": null,
     "metadata": {},
     "name": "ItemsRefetchQuery",
     "operationKind": "query",
-    "text": "query ItemsRefetchQuery(\n  $first: Int = 10\n  $offset: Int = 0\n  $search: String\n) {\n  ...ItemsFragment_2pFftX\n}\n\nfragment ItemFragment on Item {\n  name\n  description\n}\n\nfragment ItemsFragment_2pFftX on Query {\n  searchItems(search: $search, first: $first, offset: $offset) {\n    edges {\n      node {\n        id\n        ...ItemFragment\n      }\n    }\n    pageInfo {\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query ItemsRefetchQuery(\n  $after: Cursor\n  $first: Int = 10\n  $search: String\n) {\n  ...ItemsFragment_1Ozsmw\n}\n\nfragment ItemFragment on Item {\n  name\n  description\n}\n\nfragment ItemsFragment_1Ozsmw on Query {\n  searchItems(search: $search, first: $first, after: $after) {\n    edges {\n      node {\n        id\n        ...ItemFragment\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "113f0b25fa99e7881f69d712974acb20";
+(node as any).hash = "c29ef1f572dd24ea91f36f1bb1c5a7c8";
 
 export default node;

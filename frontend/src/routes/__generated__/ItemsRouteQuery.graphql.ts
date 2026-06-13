@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<ecdbcb4b7d87b756cfd27eb9574ab95d>>
+ * @generated SignedSource<<2f9bfdaf0d0d618a66b59be9e98556d6>>
  * @lightSyntaxTransform
  */
 
@@ -47,11 +47,6 @@ const node: ConcreteRequest = {
             "kind": "Literal",
             "name": "first",
             "value": 10
-          },
-          {
-            "kind": "Literal",
-            "name": "offset",
-            "value": 0
           }
         ],
         "concreteType": "ItemConnection",
@@ -116,22 +111,43 @@ const node: ConcreteRequest = {
                 "kind": "ScalarField",
                 "name": "hasNextPage",
                 "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "hasPreviousPage",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "startCursor",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "endCursor",
+                "storageKey": null
               }
             ],
             "storageKey": null
           }
         ],
-        "storageKey": "searchItems(first:10,offset:0)"
+        "storageKey": "searchItems(first:10)"
       }
     ]
   },
   "params": {
-    "cacheID": "33ae8622fe604c049c4e86b3a10a9700",
+    "cacheID": "9474af12ea2b0423025e5f11bc267100",
     "id": null,
     "metadata": {},
     "name": "ItemsRouteQuery",
     "operationKind": "query",
-    "text": "query ItemsRouteQuery {\n  ...ItemsFragment\n}\n\nfragment ItemFragment on Item {\n  name\n  description\n}\n\nfragment ItemsFragment on Query {\n  searchItems(first: 10, offset: 0) {\n    edges {\n      node {\n        id\n        ...ItemFragment\n      }\n    }\n    pageInfo {\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query ItemsRouteQuery {\n  ...ItemsFragment\n}\n\nfragment ItemFragment on Item {\n  name\n  description\n}\n\nfragment ItemsFragment on Query {\n  searchItems(first: 10) {\n    edges {\n      node {\n        id\n        ...ItemFragment\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
   }
 };
 

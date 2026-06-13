@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<64749b2b92880c458e5c039ee1b2e520>>
+ * @generated SignedSource<<f65a35239122f263bef7b22c6099e02b>>
  * @lightSyntaxTransform
  */
 
@@ -18,7 +18,10 @@ export type ItemsFragment$data = {
       } | null | undefined;
     } | null | undefined>;
     readonly pageInfo: {
+      readonly endCursor: any | null | undefined;
       readonly hasNextPage: boolean;
+      readonly hasPreviousPage: boolean;
+      readonly startCursor: any | null | undefined;
     };
   } | null | undefined;
   readonly " $fragmentType": "ItemsFragment";
@@ -33,14 +36,14 @@ import ItemsRefetchQuery_graphql from './ItemsRefetchQuery.graphql';
 const node: ReaderFragment = {
   "argumentDefinitions": [
     {
+      "defaultValue": null,
+      "kind": "LocalArgument",
+      "name": "after"
+    },
+    {
       "defaultValue": 10,
       "kind": "LocalArgument",
       "name": "first"
-    },
-    {
-      "defaultValue": 0,
-      "kind": "LocalArgument",
-      "name": "offset"
     },
     {
       "defaultValue": null,
@@ -63,13 +66,13 @@ const node: ReaderFragment = {
       "args": [
         {
           "kind": "Variable",
-          "name": "first",
-          "variableName": "first"
+          "name": "after",
+          "variableName": "after"
         },
         {
           "kind": "Variable",
-          "name": "offset",
-          "variableName": "offset"
+          "name": "first",
+          "variableName": "first"
         },
         {
           "kind": "Variable",
@@ -130,6 +133,27 @@ const node: ReaderFragment = {
               "kind": "ScalarField",
               "name": "hasNextPage",
               "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "hasPreviousPage",
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "startCursor",
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "endCursor",
+              "storageKey": null
             }
           ],
           "storageKey": null
@@ -142,6 +166,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "113f0b25fa99e7881f69d712974acb20";
+(node as any).hash = "c29ef1f572dd24ea91f36f1bb1c5a7c8";
 
 export default node;

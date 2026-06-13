@@ -25,11 +25,9 @@ case "$response" in
         ;;
 esac
 
-./scripts/build-base-image;
-
 COMPOSE_CMD="./scripts/container compose";
 
-${COMPOSE_CMD} compose volume rm "${CURRENT_DIR}_pg_data";
+./scripts/container volume rm "${CURRENT_DIR}_pg_data";
 
 ${COMPOSE_CMD} up db -d \
   && ${COMPOSE_CMD} exec db ./wait-till-ready

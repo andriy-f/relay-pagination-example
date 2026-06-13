@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9b051f7526dc4d45bd78e4c09d5692af>>
+ * @generated SignedSource<<a04c8f7b94c197ed6ee644b8356e5f52>>
  * @lightSyntaxTransform
  */
 
@@ -51,7 +51,7 @@ const node: ConcreteRequest = {
         ],
         "concreteType": "ItemConnection",
         "kind": "LinkedField",
-        "name": "searchItems",
+        "name": "allItems",
         "plural": false,
         "selections": [
           {
@@ -137,17 +137,17 @@ const node: ConcreteRequest = {
             "storageKey": null
           }
         ],
-        "storageKey": "searchItems(first:5)"
+        "storageKey": "allItems(first:5)"
       }
     ]
   },
   "params": {
-    "cacheID": "acd746cb4502582a0bf46b178c44b9a7",
+    "cacheID": "395ea801611528a3b7b09004350dcb4b",
     "id": null,
     "metadata": {},
     "name": "ItemsRouteQuery",
     "operationKind": "query",
-    "text": "query ItemsRouteQuery {\n  ...ItemsFragment\n}\n\nfragment ItemFragment on Item {\n  name\n  description\n}\n\nfragment ItemsFragment on Query {\n  searchItems(first: 5) {\n    edges {\n      node {\n        id\n        ...ItemFragment\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
+    "text": "query ItemsRouteQuery {\n  ...ItemsFragment\n}\n\nfragment ItemFragment on Item {\n  name\n  description\n}\n\nfragment ItemsFragment on Query {\n  allItems(first: 5) {\n    edges {\n      node {\n        id\n        ...ItemFragment\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
   }
 };
 

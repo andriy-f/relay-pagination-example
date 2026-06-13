@@ -45,6 +45,23 @@ export function Welcome() {
                   </svg>
                   View Items
                 </NavLink>
+                <NavLink to="/items-search" className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    className="stroke-gray-600 group-hover:stroke-current dark:stroke-gray-300"
+                  >
+                    <path
+                      d="M2.5 4.16699H17.5M2.5 10.0003H17.5M2.5 15.8337H17.5"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  View Items (Search)
+                </NavLink>
               </li>
             </ul>
           </nav>

@@ -1,5 +1,5 @@
 import React from "react"
-import Items from "~/items/items"
+import Items from "~/items/Items"
 import { graphql, useLazyLoadQuery } from "react-relay"
 import type { ItemsRouteQuery } from "./__generated__/ItemsRouteQuery.graphql"
 

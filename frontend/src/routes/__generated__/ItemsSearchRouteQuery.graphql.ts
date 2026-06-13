@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<d4c89219ea7664d6e3f4426e6aab85dc>>
+ * @generated SignedSource<<97951bc8b499137c6f53dfadda7a0311>>
  * @lightSyntaxTransform
  */
 
@@ -9,76 +9,26 @@
 
 import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type ItemsRefetchQuery$variables = {
-  after?: any | null | undefined;
-  before?: any | null | undefined;
-  first?: number | null | undefined;
-  last?: number | null | undefined;
+export type ItemsSearchRouteQuery$variables = Record<PropertyKey, never>;
+export type ItemsSearchRouteQuery$data = {
+  readonly " $fragmentSpreads": FragmentRefs<"ItemsSearchFragment">;
 };
-export type ItemsRefetchQuery$data = {
-  readonly " $fragmentSpreads": FragmentRefs<"ItemsFragment">;
-};
-export type ItemsRefetchQuery = {
-  response: ItemsRefetchQuery$data;
-  variables: ItemsRefetchQuery$variables;
+export type ItemsSearchRouteQuery = {
+  response: ItemsSearchRouteQuery$data;
+  variables: ItemsSearchRouteQuery$variables;
 };
 
-const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "after"
-  },
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "before"
-  },
-  {
-    "defaultValue": 5,
-    "kind": "LocalArgument",
-    "name": "first"
-  },
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "last"
-  }
-],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "after",
-    "variableName": "after"
-  },
-  {
-    "kind": "Variable",
-    "name": "before",
-    "variableName": "before"
-  },
-  {
-    "kind": "Variable",
-    "name": "first",
-    "variableName": "first"
-  },
-  {
-    "kind": "Variable",
-    "name": "last",
-    "variableName": "last"
-  }
-];
-return {
+const node: ConcreteRequest = {
   "fragment": {
-    "argumentDefinitions": (v0/*:: as any*/),
+    "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "ItemsRefetchQuery",
+    "name": "ItemsSearchRouteQuery",
     "selections": [
       {
-        "args": (v1/*:: as any*/),
+        "args": null,
         "kind": "FragmentSpread",
-        "name": "ItemsFragment"
+        "name": "ItemsSearchFragment"
       }
     ],
     "type": "Query",
@@ -86,16 +36,22 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": (v0/*:: as any*/),
+    "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "ItemsRefetchQuery",
+    "name": "ItemsSearchRouteQuery",
     "selections": [
       {
         "alias": null,
-        "args": (v1/*:: as any*/),
+        "args": [
+          {
+            "kind": "Literal",
+            "name": "first",
+            "value": 5
+          }
+        ],
         "concreteType": "ItemConnection",
         "kind": "LinkedField",
-        "name": "allItems",
+        "name": "searchItems",
         "plural": false,
         "selections": [
           {
@@ -181,21 +137,20 @@ return {
             "storageKey": null
           }
         ],
-        "storageKey": null
+        "storageKey": "searchItems(first:5)"
       }
     ]
   },
   "params": {
-    "cacheID": "1383d394019ec5b4f3f158aa9a6c60ce",
+    "cacheID": "f953ed2f408b652a421e519818acc30b",
     "id": null,
     "metadata": {},
-    "name": "ItemsRefetchQuery",
+    "name": "ItemsSearchRouteQuery",
     "operationKind": "query",
-    "text": "query ItemsRefetchQuery(\n  $after: Cursor\n  $before: Cursor\n  $first: Int = 5\n  $last: Int\n) {\n  ...ItemsFragment_pbnwq\n}\n\nfragment ItemFragment on Item {\n  name\n  description\n}\n\nfragment ItemsFragment_pbnwq on Query {\n  allItems(first: $first, after: $after, before: $before, last: $last) {\n    edges {\n      node {\n        id\n        ...ItemFragment\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
+    "text": "query ItemsSearchRouteQuery {\n  ...ItemsSearchFragment\n}\n\nfragment ItemFragment on Item {\n  name\n  description\n}\n\nfragment ItemsSearchFragment on Query {\n  searchItems(first: 5) {\n    edges {\n      node {\n        id\n        ...ItemFragment\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
   }
 };
-})();
 
-(node as any).hash = "fd21d5d4d713751f8222f829e397baad";
+(node as any).hash = "ed3f7a4717cce6631938750346c6c97b";
 
 export default node;

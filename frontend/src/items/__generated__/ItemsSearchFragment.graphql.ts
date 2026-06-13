@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<5e3a69db332b5de7d554a849ced3a73e>>
+ * @generated SignedSource<<b439d6953d27e5dc92c1750174025165>>
  * @lightSyntaxTransform
  */
 
@@ -9,8 +9,8 @@
 
 import { ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type ItemsFragment$data = {
-  readonly allItems: {
+export type ItemsSearchFragment$data = {
+  readonly searchItems: {
     readonly edges: ReadonlyArray<{
       readonly node: {
         readonly id: string;
@@ -24,14 +24,14 @@ export type ItemsFragment$data = {
       readonly startCursor: any | null | undefined;
     };
   } | null | undefined;
-  readonly " $fragmentType": "ItemsFragment";
+  readonly " $fragmentType": "ItemsSearchFragment";
 };
-export type ItemsFragment$key = {
-  readonly " $data"?: ItemsFragment$data;
-  readonly " $fragmentSpreads": FragmentRefs<"ItemsFragment">;
+export type ItemsSearchFragment$key = {
+  readonly " $data"?: ItemsSearchFragment$data;
+  readonly " $fragmentSpreads": FragmentRefs<"ItemsSearchFragment">;
 };
 
-import ItemsRefetchQuery_graphql from './ItemsRefetchQuery.graphql';
+import ItemsSearchRefetchQuery_graphql from './ItemsSearchRefetchQuery.graphql';
 
 const node: ReaderFragment = {
   "argumentDefinitions": [
@@ -41,11 +41,6 @@ const node: ReaderFragment = {
       "name": "after"
     },
     {
-      "defaultValue": null,
-      "kind": "LocalArgument",
-      "name": "before"
-    },
-    {
       "defaultValue": 5,
       "kind": "LocalArgument",
       "name": "first"
@@ -53,7 +48,7 @@ const node: ReaderFragment = {
     {
       "defaultValue": null,
       "kind": "LocalArgument",
-      "name": "last"
+      "name": "search"
     }
   ],
   "kind": "Fragment",
@@ -61,10 +56,10 @@ const node: ReaderFragment = {
     "refetch": {
       "connection": null,
       "fragmentPathInResult": [],
-      "operation": ItemsRefetchQuery_graphql
+      "operation": ItemsSearchRefetchQuery_graphql
     }
   },
-  "name": "ItemsFragment",
+  "name": "ItemsSearchFragment",
   "selections": [
     {
       "alias": null,
@@ -76,23 +71,18 @@ const node: ReaderFragment = {
         },
         {
           "kind": "Variable",
-          "name": "before",
-          "variableName": "before"
-        },
-        {
-          "kind": "Variable",
           "name": "first",
           "variableName": "first"
         },
         {
           "kind": "Variable",
-          "name": "last",
-          "variableName": "last"
+          "name": "search",
+          "variableName": "search"
         }
       ],
       "concreteType": "ItemConnection",
       "kind": "LinkedField",
-      "name": "allItems",
+      "name": "searchItems",
       "plural": false,
       "selections": [
         {
@@ -176,6 +166,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "fd21d5d4d713751f8222f829e397baad";
+(node as any).hash = "d870e08bf674520db0cbfdd8c7abc3cc";
 
 export default node;

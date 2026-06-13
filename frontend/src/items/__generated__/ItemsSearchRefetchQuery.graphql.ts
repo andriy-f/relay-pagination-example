@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<d4c89219ea7664d6e3f4426e6aab85dc>>
+ * @generated SignedSource<<55039a75dd11880dd3786458b50daa7c>>
  * @lightSyntaxTransform
  */
 
@@ -9,18 +9,17 @@
 
 import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type ItemsRefetchQuery$variables = {
+export type ItemsSearchRefetchQuery$variables = {
   after?: any | null | undefined;
-  before?: any | null | undefined;
   first?: number | null | undefined;
-  last?: number | null | undefined;
+  search?: string | null | undefined;
 };
-export type ItemsRefetchQuery$data = {
-  readonly " $fragmentSpreads": FragmentRefs<"ItemsFragment">;
+export type ItemsSearchRefetchQuery$data = {
+  readonly " $fragmentSpreads": FragmentRefs<"ItemsSearchFragment">;
 };
-export type ItemsRefetchQuery = {
-  response: ItemsRefetchQuery$data;
-  variables: ItemsRefetchQuery$variables;
+export type ItemsSearchRefetchQuery = {
+  response: ItemsSearchRefetchQuery$data;
+  variables: ItemsSearchRefetchQuery$variables;
 };
 
 const node: ConcreteRequest = (function(){
@@ -31,11 +30,6 @@ var v0 = [
     "name": "after"
   },
   {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "before"
-  },
-  {
     "defaultValue": 5,
     "kind": "LocalArgument",
     "name": "first"
@@ -43,7 +37,7 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "last"
+    "name": "search"
   }
 ],
 v1 = [
@@ -54,18 +48,13 @@ v1 = [
   },
   {
     "kind": "Variable",
-    "name": "before",
-    "variableName": "before"
-  },
-  {
-    "kind": "Variable",
     "name": "first",
     "variableName": "first"
   },
   {
     "kind": "Variable",
-    "name": "last",
-    "variableName": "last"
+    "name": "search",
+    "variableName": "search"
   }
 ];
 return {
@@ -73,12 +62,12 @@ return {
     "argumentDefinitions": (v0/*:: as any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "ItemsRefetchQuery",
+    "name": "ItemsSearchRefetchQuery",
     "selections": [
       {
         "args": (v1/*:: as any*/),
         "kind": "FragmentSpread",
-        "name": "ItemsFragment"
+        "name": "ItemsSearchFragment"
       }
     ],
     "type": "Query",
@@ -88,14 +77,14 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*:: as any*/),
     "kind": "Operation",
-    "name": "ItemsRefetchQuery",
+    "name": "ItemsSearchRefetchQuery",
     "selections": [
       {
         "alias": null,
         "args": (v1/*:: as any*/),
         "concreteType": "ItemConnection",
         "kind": "LinkedField",
-        "name": "allItems",
+        "name": "searchItems",
         "plural": false,
         "selections": [
           {
@@ -186,16 +175,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "1383d394019ec5b4f3f158aa9a6c60ce",
+    "cacheID": "b4defe98b3e4319427ecfa1c3a267a10",
     "id": null,
     "metadata": {},
-    "name": "ItemsRefetchQuery",
+    "name": "ItemsSearchRefetchQuery",
     "operationKind": "query",
-    "text": "query ItemsRefetchQuery(\n  $after: Cursor\n  $before: Cursor\n  $first: Int = 5\n  $last: Int\n) {\n  ...ItemsFragment_pbnwq\n}\n\nfragment ItemFragment on Item {\n  name\n  description\n}\n\nfragment ItemsFragment_pbnwq on Query {\n  allItems(first: $first, after: $after, before: $before, last: $last) {\n    edges {\n      node {\n        id\n        ...ItemFragment\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
+    "text": "query ItemsSearchRefetchQuery(\n  $after: Cursor\n  $first: Int = 5\n  $search: String\n) {\n  ...ItemsSearchFragment_1Ozsmw\n}\n\nfragment ItemFragment on Item {\n  name\n  description\n}\n\nfragment ItemsSearchFragment_1Ozsmw on Query {\n  searchItems(search: $search, first: $first, after: $after) {\n    edges {\n      node {\n        id\n        ...ItemFragment\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "fd21d5d4d713751f8222f829e397baad";
+(node as any).hash = "d870e08bf674520db0cbfdd8c7abc3cc";
 
 export default node;

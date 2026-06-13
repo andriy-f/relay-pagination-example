@@ -19,7 +19,7 @@ const app = Fastify({
 });
 
 try {
-	await app.register(appFastifyPlugin, { prefix: "/api/" });
+	await app.register(appFastifyPlugin);
 	// Run the server!
 	await app.listen({
 		port: config2.port,
